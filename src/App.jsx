@@ -1,5 +1,22 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Header } from './App.styles';
+import axios from 'axios';
 
 export const App = () => {
-  return <div>Hello world!</div>
+  const [data, setData] = useState('loading...');
+
+  //Call the API
+  useEffect(() => {
+    const makeApiCall = async () => {
+      const response = await axios.get('http://localhost:3000/hello-world');
+      setData(response.data);
+    }
+    
+    makeApiCall();
+  }, [])
+
+
+  //Save response to variable
+  //Render the response
+  return <Header>{data}</Header>
 };
